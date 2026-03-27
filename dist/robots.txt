@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://aravindh2727.github.io/FuturePath-3D/sitemap.xml
