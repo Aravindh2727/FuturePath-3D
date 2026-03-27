@@ -104,7 +104,12 @@ const AdminLoginPage = () => {
           {/* Profile block */}
           <div className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 shadow-inner/10">
             <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl overflow-hidden bg-gradient-to-br from-primary to-accent">
-              <img src="/av-logo.jpg" alt="Aravindh V logo" className="h-full w-full object-cover" loading="lazy" />
+              <img
+                src={`${import.meta.env.BASE_URL}av-logo.jpg`}
+                alt="Aravindh V logo"
+                className="h-full w-full object-cover"
+                loading="lazy"
+              />
             </div>
             <div className="leading-tight space-y-1">
               <div className="text-base font-semibold text-white">Aravindh V</div>
