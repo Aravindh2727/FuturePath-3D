@@ -2,10 +2,12 @@ import { useMemo } from "react";
 import { SectionHeader } from "../components/ui/SectionHeader";
 import { Card } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
+import { Link } from "react-router-dom";
 import { useFavoritesStore } from "../store/useFavoritesStore";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguageStore } from "../store/useLanguageStore";
 import { localizeStream, localizeDepartment } from "../utils/i18n";
+import { mapStreamToSlug } from "./StreamsPage";
 import { Seo } from "../components/Seo";
 
 const FavoritesPage = () => {
@@ -61,12 +63,12 @@ const FavoritesPage = () => {
                   actions={
                     <div className="flex gap-2">
                       {fav.type === "stream" && (
-                        <Button as="a" href={`/departments?stream=${fav.id}`} variant="ghost" className="text-xs px-3">
+                        <Button as={Link} to={`/stream/${mapStreamToSlug(fav.id)}`} variant="ghost" className="text-xs px-3">
                           View stream
                         </Button>
                       )}
                       {fav.type === "department" && (
-                        <Button as="a" href={`/department/${fav.slug ?? fav.id}`} variant="ghost" className="text-xs px-3">
+                        <Button as={Link} to={`/department/${fav.slug ?? fav.id}`} variant="ghost" className="text-xs px-3">
                           View department
                         </Button>
                       )}

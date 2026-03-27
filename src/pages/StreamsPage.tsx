@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { Link } from "react-router-dom";
 import { SectionHeader } from "../components/ui/SectionHeader";
 import { Card } from "../components/ui/Card";
 import { Button } from "../components/ui/Button";
@@ -34,81 +35,21 @@ const StreamsPage = () => {
             actions={
               <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 w-full">
                 <Button
-                  as="a"
-                  href={
-                    stream.id === "engineering"
-                      ? "/stream/engineering"
-                      : stream.id === "arts-science"
-                        ? "/stream/arts-science"
-                        : stream.id === "commerce"
-                          ? "/stream/commerce"
-                          : `/departments?stream=${stream.id}`
-                  }
+                  as={Link}
+                  to={`/stream/${mapStreamToSlug(stream.id)}`}
                   variant="ghost"
                   className="text-xs px-3 w-full sm:w-auto"
                 >
                   {stream.departmentCount} departments
                 </Button>
-                {stream.id === "engineering" && (
-                  <Button as="a" href="/stream/engineering" variant="primary" className="text-xs px-3 w-full sm:w-auto">
-                    Open engineering explorer
-                  </Button>
-                )}
-                {stream.id === "arts-science" && (
-                  <Button as="a" href="/stream/arts-science" variant="primary" className="text-xs px-3 w-full sm:w-auto">
-                    Open arts & science explorer
-                  </Button>
-                )}
-                {stream.id === "commerce" && (
-                  <Button as="a" href="/stream/commerce" variant="primary" className="text-xs px-3 w-full sm:w-auto">
-                    Open commerce explorer
-                  </Button>
-                )}
-                {stream.id === "medical" && (
-                  <Button as="a" href="/stream/medical" variant="primary" className="text-xs px-3 w-full sm:w-auto">
-                    Open medical explorer
-                  </Button>
-                )}
-                {stream.id === "paramedical" && (
-                  <Button as="a" href="/stream/paramedical" variant="primary" className="text-xs px-3 w-full sm:w-auto">
-                    Open paramedical explorer
-                  </Button>
-                )}
-                {stream.id === "agriculture" && (
-                  <Button as="a" href="/stream/agriculture" variant="primary" className="text-xs px-3 w-full sm:w-auto">
-                    Open agriculture explorer
-                  </Button>
-                )}
-                {stream.id === "law" && (
-                  <Button as="a" href="/stream/law" variant="primary" className="text-xs px-3 w-full sm:w-auto">
-                    Open law explorer
-                  </Button>
-                )}
-                {stream.id === "design-media" && (
-                  <Button as="a" href="/stream/design-media" variant="primary" className="text-xs px-3 w-full sm:w-auto">
-                    Open design & media explorer
-                  </Button>
-                )}
-                {stream.id === "management" && (
-                  <Button as="a" href="/stream/management" variant="primary" className="text-xs px-3 w-full sm:w-auto">
-                    Open management explorer
-                  </Button>
-                )}
-                {stream.id === "diploma" && (
-                  <Button as="a" href="/stream/diploma-polytechnic" variant="primary" className="text-xs px-3 w-full sm:w-auto">
-                    Open diploma explorer
-                  </Button>
-                )}
-                {stream.id === "vocational" && (
-                  <Button as="a" href="/stream/vocational-skill-based" variant="primary" className="text-xs px-3 w-full sm:w-auto">
-                    Open vocational explorer
-                  </Button>
-                )}
-                {stream.id === "government" && (
-                  <Button as="a" href="/stream/government-career-paths" variant="primary" className="text-xs px-3 w-full sm:w-auto">
-                    Open government careers
-                  </Button>
-                )}
+                <Button
+                  as={Link}
+                  to={`/stream/${mapStreamToSlug(stream.id)}`}
+                  variant="primary"
+                  className="text-xs px-3 w-full sm:w-auto"
+                >
+                  Open {stream.title.toLowerCase()} explorer
+                </Button>
               </div>
             }
           >
@@ -130,3 +71,16 @@ const StreamsPage = () => {
 };
 
 export default StreamsPage;
+
+export const mapStreamToSlug = (id: string) => {
+  switch (id) {
+    case "diploma":
+      return "diploma-polytechnic";
+    case "vocational":
+      return "vocational-skill-based";
+    case "government":
+      return "government-career-paths";
+    default:
+      return id;
+  }
+};

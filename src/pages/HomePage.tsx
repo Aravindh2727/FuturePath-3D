@@ -11,6 +11,8 @@ import { useFavoritesStore } from "../store/useFavoritesStore";
 import { useLanguageStore } from "../store/useLanguageStore";
 import { localizeStream } from "../utils/i18n";
 import { Seo } from "../components/Seo";
+import { mapStreamToSlug } from "./StreamsPage";
+import { Link } from "react-router-dom";
 
 const whyItems = [
   {
@@ -147,7 +149,7 @@ const HomePage = () => {
               title={ls.title}
               actions={
                 <div className="flex gap-2">
-                  <Button as="a" href={`/departments?stream=${stream.id}`} variant="ghost" className="text-xs px-3">
+                  <Button as={Link} to={`/stream/${mapStreamToSlug(stream.id)}`} variant="ghost" className="text-xs px-3">
                     View details
                   </Button>
                   <Button
