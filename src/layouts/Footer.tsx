@@ -1,5 +1,6 @@
 import React from "react";
 import { School } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const LinkedinSquare = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 448 512" width={20} height={20} fill="currentColor" aria-hidden="true" {...props}>
@@ -10,8 +11,8 @@ const LinkIcon = LinkedinSquare;
 
 const Footer = () => {
   const socials = [
-    { icon: LinkIcon, href: "https://www.linkedin.com/in/aravindh-v2727/", label: "LinkedIn" },
-    { icon: School, href: "/welcome-to-ugc.xlsx", label: "UGC File Preview" },
+    { icon: LinkIcon, href: "https://www.linkedin.com/in/aravindh-v2727/", label: "LinkedIn", external: true },
+    { icon: School, href: "/colleges", label: "Colleges", external: false },
   ];
 
   return (
@@ -24,18 +25,29 @@ const Footer = () => {
           </p>
         </div>
         <div className="flex gap-3">
-          {socials.map(({ icon: Icon, href, label }) => (
-            <a
-              key={label}
-              href={href}
-              target="_blank"
-              rel="noreferrer"
-              className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-neutral-100 hover:border-primary/60 hover:text-primary transition-colors"
-              aria-label={label}
-            >
-              <Icon size={18} />
-            </a>
-          ))}
+          {socials.map(({ icon: Icon, href, label, external }) =>
+            external ? (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-neutral-100 hover:border-primary/60 hover:text-primary transition-colors"
+                aria-label={label}
+              >
+                <Icon size={18} />
+              </a>
+            ) : (
+              <Link
+                key={label}
+                to={href}
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 text-neutral-100 hover:border-primary/60 hover:text-primary transition-colors"
+                aria-label={label}
+              >
+                <Icon size={18} />
+              </Link>
+            ),
+          )}
         </div>
       </div>
     </footer>
